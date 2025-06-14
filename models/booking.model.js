@@ -1,4 +1,8 @@
 import mongoose from "mongoose"
+import { connectDB } from "../connection.js";
+
+
+await connectDB();
 
 const bookingSchema = mongoose.Schema({
     userId: {

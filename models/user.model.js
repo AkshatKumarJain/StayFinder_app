@@ -1,5 +1,7 @@
-// import { connectDB } from "../connection.js";
 import mongoose from "mongoose";
+import { connectDB } from "../connection.js";
+
+await connectDB();
 
 const userSchema = mongoose.Schema({
     firstName: {
