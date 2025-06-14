@@ -36,6 +36,9 @@ const listingSchema = mongoose.Schema({
     image: {
         type: String,
         required: true
+    },
+    Availibility: {
+        enum: ["Available", "Not available"]
     }
 }, {timestamps: true})
 
