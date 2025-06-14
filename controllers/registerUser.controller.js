@@ -13,12 +13,22 @@ export const createUser = async (req, res) => {
     {
         try {
             const { firstName, lastName, email, phoneNumber, address, password, confirmPassword } = req.body;
+            if(phoneNumber.length==10)
+            {
             const createdUser = await User.create({firstName, lastName, email, phoneNumber, address, password, confirmPassword});
             
             res.status(201).json({
                 message: "User created successfully",
                 data: createdUser
             })
+            }
+            else 
+            {
+                res.status(400).json({
+                    message: "please give correct phone number"
+                })
+            }
+
         } catch (error) {
             res.status(500).json({
                 message: error
