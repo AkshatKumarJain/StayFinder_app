@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "An app where users can list and book properties for short-term or long-term stays.",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "jwt",
+    "bcrypt"
+  ],
+  "author": "Akshat Jain",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.15.2"
+  }
+}
