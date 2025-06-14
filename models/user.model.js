@@ -47,6 +47,15 @@ const userSchema = mongoose.Schema({
     },
     favourites: {
         type: Boolean
+    },
+    bookings: {
+       type: Array,
+       default: [] 
+    },
+    role: {
+        enum:[
+            "guest", "Host"
+        ]
     }
 }, { timestamps: true })
 

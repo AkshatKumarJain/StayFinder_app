@@ -1,0 +1,42 @@
+import mongoose from "mongoose"
+
+const listingSchema = mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        default: "NA"
+    },
+    price: {
+        type: Number
+    },
+    location: [
+        {
+            city: {
+                type: String,
+                required: true,
+            },
+            state: {
+                type: String,
+                required: true,
+            },
+            country: {
+                type: String,
+                required: true
+            }
+        }
+    ],
+    hostId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    }
+}, {timestamps: true})
+
+export const Listing = mongoose.model("Listing", listingSchema);
