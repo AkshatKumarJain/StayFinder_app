@@ -2,6 +2,7 @@ import { User } from "../models/user.model.js";
 import bcrypt from "bcrypt"
 
 export const createUser = async (req, res) => {
+    // check if user exists or not
     const {email} = req.body;
     const findUser = await User.findOne({email});
     if(findUser)
@@ -12,10 +13,12 @@ export const createUser = async (req, res) => {
     }
     else
     {
+        // register user
         try {
             const { firstName, lastName, email, phoneNumber, address, password, confirmPassword } = req.body;
             if(phoneNumber.length==10)
             {
+                // password encryption
                 const saltRounds = 10;
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     bcrypt.hash(password, salt, async (err, hash) => {
