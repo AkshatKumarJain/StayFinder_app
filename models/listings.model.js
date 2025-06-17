@@ -4,7 +4,7 @@ import { connectDB } from "../connection.js";
 
 await connectDB();
 
-const listingSchema = mongoose.Schema({
+const listingSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
@@ -34,14 +34,14 @@ const listingSchema = mongoose.Schema({
     ],
     hostId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+        ref: "User",
     },
     image: {
         type: String,
         required: true
     },
     Availibility: {
+        type: String,
         enum: ["Available", "Not available"]
     }
 }, {timestamps: true})

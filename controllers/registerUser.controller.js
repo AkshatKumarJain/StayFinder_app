@@ -15,14 +15,20 @@ export const createUser = async (req, res) => {
     {
         // register user
         try {
-            const { firstName, lastName, email, phoneNumber, address, password, confirmPassword } = req.body;
+            const { firstName, lastName, email, phoneNumber, address, password, confirmPassword, role } = req.body;
             if(phoneNumber.length==10)
             {
+                if(password!==confirmPassword)
+                {
+                   return res.status(400).json({
+                        message: "password and confirm password must be same"
+                    })
+                }
                 // password encryption
                 const saltRounds = 10;
                 bcrypt.genSalt(saltRounds, (err, salt) => {
                     bcrypt.hash(password, salt, async (err, hash) => {
-                        const createdUser = await User.create({firstName, lastName, email, phoneNumber, address, password: hash, confirmPassword: hash});
+                        const createdUser = await User.create({firstName, lastName, email, phoneNumber, address, password: hash, confirmPassword: hash, role});
                         res.status(201).json({
                         message: "User created successfully",
                         data: createdUser

@@ -13,11 +13,10 @@ export const login = async (req, res) => {
 
             // comparision of password
             const isCorrect = await bcrypt.compare(password, foundUser.password);
-            console.log(isCorrect);
             if(isCorrect)
             {
-                // formation of token
-                const token = jwt.sign({userId: User._id}, process.env.JWT_SECRET, {expiresIn: "1h"})
+                // formation of token. Add role of user also.
+                const token = jwt.sign({userId: foundUser._id, role: foundUser.role}, process.env.JWT_SECRET, {expiresIn: "1h"})
                 res.status(200).json({
                 message: "User found", token,
                 data: foundUser

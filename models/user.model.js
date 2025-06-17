@@ -4,7 +4,7 @@ import { size } from "zod/v4";
 
 await connectDB();
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true
@@ -56,9 +56,10 @@ const userSchema = mongoose.Schema({
        default: [] 
     },
     role: {
-        enum:[
-            "guest", "Host"
-        ]
+        type: String,
+        enum: ["guest", "Host"],
+        default: "guest",
+        required: true
     }
 }, { timestamps: true })
 
