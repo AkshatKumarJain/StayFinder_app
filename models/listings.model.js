@@ -18,6 +18,10 @@ const listingSchema = new mongoose.Schema({
     },
     location: [
         {
+            houseAddress:{
+                type: String,
+                required: true
+            },
             city: {
                 type: String,
                 required: true,
