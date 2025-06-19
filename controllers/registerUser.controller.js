@@ -16,7 +16,7 @@ export const createUser = async (req, res) => {
         // register user
         try {
             const { firstName, lastName, email, phoneNumber, address, password, confirmPassword, role } = req.body;
-            if(phoneNumber.length==10)
+            if(phoneNumber.length===10)
             {
                 if(password!==confirmPassword)
                 {

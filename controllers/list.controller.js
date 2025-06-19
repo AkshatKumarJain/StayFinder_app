@@ -57,3 +57,18 @@ export const postPlace = async (req, res) => {
         })
     }
 }
+
+export const getListingsById = async (req, res) => {
+    try {
+        const id = req.params;
+        const findListing = await Listing.findOne({ id });
+        res.status(200).json({
+        message: "data fetch successfully",
+        data: findListing
+    })
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        })
+    }
+}
