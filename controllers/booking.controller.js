@@ -39,13 +39,27 @@ export const booking = async (req, res) => {
 
 export const cancelBooking = async (req, res) => {
     try {
-        const id = req.body;
-        const findBooking = await Booking.findOne({_id: id}); 
+        const {id} = req.body;
+        const findBooking = await Booking.findById(id); 
+        // console.log(findBooking);
         if(findBooking)
         {
-            const cancellation = await Booking.delete()
+            const listingId = findBooking.listingId;
+            await Booking.deleteOne({ _id: id });
+            await Listing.updateOne({_id: listingId}, {$set: {Availibility: "Available"}});
+            res.status(200).json({
+                message: "booking canceled"
+            })
+        }
+        else
+        {
+            res.status(400).json({
+                message: "You have no bookings"
+            })
         }
     } catch (error) {
-        
+        res.status(500).json({
+            message:"error", error
+        })
     }
 }
