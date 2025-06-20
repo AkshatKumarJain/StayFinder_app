@@ -82,3 +82,28 @@ export const filterByState = async (req, res) => {
     }
 }
 
+export const filterByCountry = async (req, res) => {
+    try {
+        const { loc } = req.query;
+        console.log(loc);
+        const getListByLocation = await Listing.find({ "location.country": { $regex: loc, $options: "i" } });
+        console.log(getListByLocation);
+        if(getListByLocation)
+        {
+            res.status(200).json({
+                message: "Found",
+                data: getListByLocation
+            })
+        }
+        else
+        {
+            res.status(200).json({
+                message: "Not found"
+            })
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        })
+    }
+}
