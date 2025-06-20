@@ -7,6 +7,7 @@ import { Booking } from "./models/booking.model.js";
 import userRouter from "./routes/user.route.js";
 import listRouter from "./routes/listing.route.js"
 import bookingRouter from "./routes/booking.route.js"
+import filterRouter from "./routes/filter.route.js"
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -17,6 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRouter);
 app.use(listRouter);
 app.use(bookingRouter);
+app.use(filterRouter);
 
 app.listen(port, () => {
     console.log(`The server is running at port: ${port}.`);
