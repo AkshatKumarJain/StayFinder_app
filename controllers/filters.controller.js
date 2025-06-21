@@ -107,3 +107,22 @@ export const filterByCountry = async (req, res) => {
         })
     }
 }
+
+export const getFilteredListings = async (req, res) => {
+  const { minPrice, maxPrice } = req.query;
+  const filter = {};
+
+  if (minPrice || maxPrice) {
+    filter.price = {};
+    if (minPrice) filter.price.$gte = Number(minPrice);
+    if (maxPrice) filter.price.$lte = Number(maxPrice);
+  }
+
+  try {
+    const findlistings = await Listing.find(filter);
+    res.status(200).json({ message: 'Filtered listings', data: findlistings });
+  } catch (error) {
+    res.status(500).json({ message: "error", error });
+  }
+};
+
