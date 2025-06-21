@@ -10,6 +10,12 @@ export const booking = async (req, res) => {
         // console.log(foundListing);
         if(foundListing)
         {
+            if(startDate<Date.now() || endDate<startDate)
+            {
+                return res.status(404).json({
+                    message: "Please select correct date"
+                })
+            }
             const available = foundListing.Availibility;
             if(available==="Not available")
             {
@@ -17,7 +23,11 @@ export const booking = async (req, res) => {
                     message: "Already booked"
                 })
             }
-            const booked = await Booking.create({ listingId, userId, startDate, endDate });
+            await Booking.create({ listingId, userId, startDate, endDate });
+            if(Date.now()<=startDate && Date.now()>=endDate && Availibility==="Not available")
+            {
+                await Listing.updateOne({_id: listingId}, {$set: {Availibility: "Available"}});
+            }
             await Listing.updateOne({_id: listingId}, {$set: {Availibility: "Not available"}});
             res.status(201).json({
                 message: "place booked successfully",
@@ -44,6 +54,12 @@ export const cancelBooking = async (req, res) => {
         // console.log(findBooking);
         if(findBooking)
         {
+            if(Date.now()>findBooking.endDate)
+            {
+                return res.status(400).json({
+                    message: "cannot cancel booking"
+                })
+            }
             const listingId = findBooking.listingId;
             await Booking.deleteOne({ _id: id });
             await Listing.updateOne({_id: listingId}, {$set: {Availibility: "Available"}});

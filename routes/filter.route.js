@@ -3,8 +3,7 @@ import { Listing } from "../models/listings.model.js";
 import { Booking } from "../models/booking.model.js";
 import express from "express";
 import { verifyToken } from "../middlewares/auth.middleware.js";
-import { getFilteredListings } from "../controllers/filters.controller.js"
-import { filterByCity, filterByBuilding, filterByState, filterByCountry } from "../controllers/filters.controller.js";
+import { filterByCity, filterByBuilding, filterByState, filterByCountry, filterByPrice } from "../controllers/filters.controller.js";
 
 const router = express.Router();
 
@@ -14,8 +13,7 @@ router.get("/locationByBuilding", verifyToken, filterByBuilding);
 router.get("/locationByState", verifyToken, filterByState);
 router.get("/locationByCountry", verifyToken, filterByCountry);
 
-// on the basis of price, date
-router.get("/listing/filter", verifyToken, getFilteredListings);
-
+// on the basis of price
+router.get("/listingByPrice", verifyToken, filterByPrice);
 
 export default router;

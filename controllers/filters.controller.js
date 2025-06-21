@@ -108,7 +108,7 @@ export const filterByCountry = async (req, res) => {
     }
 }
 
-export const getFilteredListings = async (req, res) => {
+export const filterByPrice = async (req, res) => {
   const { minPrice, maxPrice } = req.query;
   const filter = {};
 
