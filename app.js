@@ -8,6 +8,7 @@ import userRouter from "./routes/user.route.js";
 import listRouter from "./routes/listing.route.js"
 import bookingRouter from "./routes/booking.route.js"
 import filterRouter from "./routes/filter.route.js"
+import paymentRouter from "./routes/payment.route.js"
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -19,6 +20,7 @@ app.use(userRouter);
 app.use(listRouter);
 app.use(bookingRouter);
 app.use(filterRouter);
+app.use(paymentRouter);
 
 app.listen(port, () => {
     console.log(`The server is running at port: ${port}.`);
